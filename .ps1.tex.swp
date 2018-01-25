@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+%Gummi|065|=)
+\title{\textbf{CS 374 Problem Set 1}}
+\date{}
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+\subsection*{1.}
+Define function $h$ mapping regular expressions over $\Sigma$ to regular expressions over $\Delta$ as follows:
+\[h(r)=
+	\begin{cases}
+	\emptyset & \text{if } r=\emptyset \\
+	\epsilon & \text{if } r=\epsilon \\
+	h(a) & \text{if } r=a\in\Sigma \\
+	(h(r_1)+h(r_2)) & \text{if } r=(r_1+r_2) \\
+	(h(r_1)h(r_2)) & \text{if } r=(r_1r_2) \\
+	(h(r_1)^*) & \text{if } r=(r_1^*)
+	\end{cases}
+\]
+
+\subsection*{2.}
+\textbf{Given property}: For every pair of strings $u,v$, $h(uv)=h(u)h(v)$. \\
+\\
+Let us first prove two lemmas that we will need for this proof: \\
+\\
+\textbf{Lemma 1}: $f(A)\cup f(B)=f(A\cup B)$ \\
+\textbf{Proof}: Note the preimages $f^{-1}(A)=\{a\hspace{1mm}|\hspace{1mm}a\in A\}$ and $f^{-1}(B)=\{b\hspace{1mm}|\hspace{1mm}b\in B\}$. We also see that the preimage $f^{-1}(A\cup B)=\{x\hspace{1mm}|\hspace{1mm}x\in (A\cup B)\}$. Trivially, we see that $\{a\hspace{1mm}|\hspace{1mm}a\in A\}\cup\{b\hspace{1mm}|\hspace{1mm}b\in B\}=\{x\hspace{1mm}|\hspace{1mm}(x\in A)\cup(x\in B)\}=\{x\hspace{1mm}|\hspace{1mm}x\in(A\cup B)\}$. Since the function is applied to identical preimages, the images of $f(A)\cup f(B)$ and $f(A\cup B)$ must be equal. \\ \qed \\ 
+\\
+\textbf{Lemma 2}: $h(w^k)=h(w)^k \hspace{1mm}\forall\hspace{1mm}k\in\mathbb{N}$. \\
+\textbf{Proof}: Prove by induction on k. \\
+\textbf{Base}: $k=0,\hspace{2mm}h(w^0)=h(\epsilon)=\epsilon=h(w)^0$. Base case holds. \\
+\textbf{Inductive}: Assume that $\forall\hspace{1mm}k<n,\hspace{1mm}h(w^k)=h(w)^k$. \\
+Take $k=n$. $w^n=w\cdot w^{n-1}\Rightarrow h(w)=h(w\cdot w^{n-1})=h(w)h(w^{n-1})$ by given property. By the inductive assumption, we see that $h(w)h(w^{n-1})=h(w)(h(w))^{n-1}=(h(w))^n$. \\ \qed \\
+\\
+Proof will be completed by induction on the number of operations in regular expression $r$. Let us define function:
+\[\#_{ops}:\hspace{1mm}\{r\hspace{1mm}|\hspace{1mm}\text{r is a regular expression}\}\rightarrow\mathbb{N}\]
+such that $\#_{ops}(r_1)=$ number of operations in regular expression $r_1$. \\
+\\
+\textbf{Base}: $\#_{ops}(r)=1$. This presents 3 cases: $r\in\{\emptyset,\hspace{1mm}\epsilon,\hspace{1mm}h(a)\}$. \\
+\begin{itemize}
+	\item \textbf{Case $\emptyset$}: $r=\emptyset\Rightarrow L(r)=\emptyset\Rightarrow h(L(r))=\emptyset =L(h(r))$
+	\item \textbf{Case $\epsilon$}: $r=\epsilon\Rightarrow L(r)=\{\epsilon\}\Rightarrow h(L(r))=\{\epsilon\}=L(h(r))$
+	\item \textbf{Case $a\in\Sigma$}: $r=a\Rightarrow L(r)=\{a\}\Rightarrow h(L(r))=\{h(a)\}=L(h(r))$
+\end{itemize}
+\textbf{Inductive Assumption}: Assume that for all regular expressions with fewer than $n$ operations, that $L(h(r))=h(L(r))$. \\
+\\
+A regular expression $r$ with $n$ operations can be written in one of 3 ways: \\
+\begin{enumerate}
+	\item $r_1+r_2$, where $\#_{ops}(r_1)=n-1$ and $\#_{ops}(r_2)=1$.
+	\item $r_1r_2$, where $\#_{ops}(r_1)=n-1$ and $\#_{ops}(r_2)=1$.
+	\item $(r_1^*)$, where $\#_{ops}(r_1)=n-1$.
+\end{enumerate}
+\ \\
+\underline{\textbf{Case $r=r_1+r_2$}:}
+\[L(r_1+r_2)=\{w\hspace{1mm}|\hspace{1mm}w\in(L(r_1)\cup L(r_2))\}\]
+Since both $\#_{ops}(r_1)=n-1<n$ and $\#_{ops}(r_2)=1<n$, bot $r_1$ and $r_2$ fall under the inductive assumption and we can say that $h(L(r_1))=L(h(r_2))$ and $h(L(r_2))=L(h(r_2))$. Note that $L(r_1+r_2)=L(r_1)\cup L(r_2)$ by definition.We can apply $h$ to both sides and we get $h(L(r_1+r_2))=h(L(r_1))\cup h(L(r_2))=L(h(r_1))\cup L(h(r_2))$. By Lemma $\#$1, we see that:
+\[L(h(r-1))\cup L(h(r_2))=L(h(r_1)+h(r_2))=L(h(r_1+r_2))=L(h(r))=h(L(r_1+r_2))=h(L(r))\]
+\\
+\underline{\textbf{Case $r=r_1r_2$}:}
+\[L(r_1r_2)=\{w_1w_2\hspace{1mm}|\hspace{1mm}w_1\in L(r_1),\hspace{1mm}w_2\in L(r_2)\}\Rightarrow h(L(r_1r_2))=\{h(w_1w_2)\hspace{1mm}|\hspace{1mm}w_1\in L(r_1),\hspace{1mm}w_2\in L(r_2)\}\]
+By the given property, we can see that:
+\[\{h(w_1w_2)\hspace{1mm}|\hspace{1mm}w_1\in L(r_1),\hspace{1mm}w_2\in L(r_2)\}=\{h(w_1)h(w_2)\hspace{1mm}|\hspace{1mm}w_1\in L(r_1),\hspace{1mm}w_2\in L(r_2)\}\]
+\[\{h(w_1)h(w_2)\hspace{1mm}|\hspace{1mm}w_1\in L(r_1),\hspace{1mm}w_2\in L(r_2)\}=h(L(r_1))\cdot h(L(r_2))\]
+Since $\#_{ops}(r_1)=n-1<n$ and $\#_{ops}(r_2)=1<n$, the inductive assumption implies that:
+\[h(L(r_1))\cdot h(L(r_2))=L(h(r_1))\cdot L(h(r_2))=L(h(r_1)h(r_2))=L(h(r))\]
+\\
+\underline{\textbf{Case $(r_1^*)$}:} \\
+By definition, we know that $L(h(r_1^*))=L((h(r_1))^*)=\{h(w)^k\hspace{1mm}|\hspace{1mm}w\in L(r_1),\hspace{1mm}k\in\mathbb{N}\}$.
+\[\{h(w)^k\hspace{1mm}|\hspace{1mm}w\in L(r_1),\hspace{1mm}k\in\mathbb{N}\}=\{h(w^k)\hspace{1mm}|\hspace{1mm}w\in L(r_1),\hspace{1mm}k\in\mathbb{N}\}\text{ by Lemma }\#2.\]
+\[h(L(r_1))=\{h(w)\hspace{1mm}|\hspace{1mm}w\in L(r_1)\}\Rightarrow h(L(r_1^*))=\{h(w^k)\hspace{1mm}|\hspace{1mm}w\in L(r_1),\hspace{1mm}k\in\mathbb{N}\}\]
+the two sets are equal, therefore $L(h(r))=L(h(r_1^*))=h(L(r_1^*))=h(L(r))$. \\ \qed
+
+\end{document}
