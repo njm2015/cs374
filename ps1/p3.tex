@@ -1,0 +1,64 @@
+\documentclass[11pt]{article}
+%Gummi|065|=)
+\title{\textbf{CS 374 Problem Set 1}}
+\date{}
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 3}
+Let us define DFA $M=(Q,\Sigma,\delta,s,A)$ such that $M$ defines the language
+\[L=\{w\in\{0,1\}^*\hspace{1mm}|\hspace{1mm}w\text{ starts with 0 and has an odd number of 01 substrings}\}\]
+\begin{itemize}
+	\item $Q=\{S,R,0,1,2,3\}$
+	\item $A=\{1,2\}$
+	\item $s=S$
+	\item $\Sigma=\{0,1\}^*$
+	\item $q$ is defined by the following. Note that for some cases we use the numerical values of the state names to determine the next state.
+	\begin{itemize}
+		\item $\delta(S,0)=0$
+		\item $\delta(S,1)=R$
+		\item $\delta(R,0)=R$
+		\item $\delta(R,1)=R$
+		\[\delta(q,0)=\begin{cases}
+			q & \text{if }q\text{ mod }2=0 \\
+			(q+1)\text{ mod }4 & \text{if }q\text{ mod }2=1
+		\end{cases}\]
+		\[\delta(q,1)=\begin{cases}
+			(q+1)\text{ mod }4 & \text{if }q\text{ mod }2=1 \\
+			q & \text{if }q\text{ mod }2=0
+		\end{cases}\]
+	\end{itemize}
+\end{itemize}
+
+\begin{tikzpicture}[->,shorten >=1pt,auto,on grid,node distance=3.5cm, thick,node/.style={circle,draw}]
+	\node[state,initial] (S)   {$S$}; 
+	\node[state] (R) [below right=of S] {$R$}; 
+	\node[state] (A) [above right=of S] {$0$}; 
+	\node[state,accepting] (B) [above right=of A] {$1$}; 
+	\node[state,accepting] (C) [right=of B] {$2$}; 
+	\node[state] (D) [below right=of C] {$3$}; 
+    \path[->] 
+    (S) edge  node {0} (A)
+          edge  node [swap] {1} (R)
+    (R) edge [loop below] node {0, 1} ()
+    (A) edge  node {1} (B)
+          edge [loop above] node {0} ()
+    (B) edge  node {0} (C)
+          edge [loop above] node {1} ()
+    (C) edge  node {1} (D)
+          edge [loop above] node {0} ()          
+    (D) edge  node [swap] {0} (A)
+          ;
+
+\end{tikzpicture}
+
+\end{document}

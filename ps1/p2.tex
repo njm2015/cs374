@@ -1,0 +1,35 @@
+\documentclass[11pt]{article}
+%Gummi|065|=)
+\title{\textbf{CS 374 Problem Set 1}}
+\date{}
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 2}
+\subsection*{1.}
+\begin{itemize}
+	\item $\rho(\epsilon)=\{(A,A),(B,B),(C,C),(D,D),(E,E),(F,F)\}$
+	\item $\rho(1011)=\{(C,A),(D,B),(E,C),(F,D),(A,E),(B,F)\}$
+	\item $\rho(101)=\{(D,A),(E,B),(F,C),(A,D),(B,E),(C,F)\}$
+	\item $\rho(10110)=\{(B,A),(C,B),(D,C),(E,D),(F,E),(A,F)\}$
+\end{itemize}
+\subsection*{2.}
+For a general DFA, $\rho(w)=\{(q_1,q_2)\hspace{1mm}|\hspace{1mm}q_1\in Q,\hspace{1mm}q_2=\delta^*(q_1,w)\}$
+\subsection*{3.}
+\[\rho(10110)=\{(B,A),(C,B),(D,C),(E,D),(F,E),(A,F)\}\]
+We see that $s='A'\in Q,\hspace{1mm}'F'\in A\subseteq Q$, and $(A,F)\in \rho(10110)$. It follows that $w=10110\in L'(M_0)$.
+\[\rho(101)=\{(D,A),(E,B),(F,C),(A,D),(B,E),(C,F)\}\]
+$(A,D)$ is the only pair $(q_1,q_2)\in\rho(101)$ where $q_1=s$, however, $'D'\notin A\subseteq Q$, so we must say that $w-101\notin L'(M_0)$.
+\subsection*{4.}
+\[L'(M_0)=\{w\hspace{1mm}|\hspace{1mm}|w|\text{ mod }6\in\{1,5\}\}\]
+\subsection*{5.}
+In general, $L'(M)=L(M)$ because $L'(M)$ describes pairs of states $(q_1,q_2)\in\rho(w)$ where $q_1=s$ and $q_2\in A$. Given our definition of $\rho(w)$ above we can see that $L(M)=\{w\hspace{1mm}|\hspace{1mm}\delta^*(s,w)\in A\}$ defines the same set as $L'(M)$.
+
+\end{document}
