@@ -1,12 +1,17 @@
 \documentclass[11pt]{article}
 %Gummi|065|=)
-\title{\textbf{CS 374 Problem Set 1}}
+\title{\textbf{CS 374 Spring 2018 \\
+				Homework 1}}
+\author{Nathaniel Murphy (njmurph3) \\
+		Tanvi Modi (tmodi3) \\
+		Marianne Huang (mhuang46)}
 \date{}
 \usepackage{a4wide}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{mathtools}
+
 
 \begin{document}
 
