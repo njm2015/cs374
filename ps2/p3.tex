@@ -28,7 +28,7 @@
 	\node[state] (qq0)[right=of q0] {$(1,0)$};
 	\node[state] (qq1)[right=of q1] {$(1,1)$};
 	\node[state] (qqk)[right=of qk] {$(1,k)$};
-	\node[state] (t)  [above right=of qqk] {$t$};
+	\node[state, accepting] (t)  [above right=of qqk] {$t$};
 	\path (qs) edge node {0} (q0);
 	\path (qs) edge node {1} (q1);
 	\path (qs) edge node {$k$} (qk);
@@ -49,6 +49,7 @@
 	\path (qq0) edge node {0} (t);
 	\path (qq1) edge node {1} (t);
 	\path (qqk) edge node {$k$} (t);
+	\path (t) edge [loop right] node {$\Sigma_k$} ();
 \end{tikzpicture}
 
 \newpage
@@ -57,7 +58,7 @@
 Let us define NFA $N=(Q,\Sigma,\delta,s,A)$ such that $N$ defines the language $T_k$
 \begin{itemize}
 	\item $Q=\{0, 1\} \times \Sigma_k \cup\{t,S\}$
-	\item $\Sigma=\Sigma_k \cup \natural$
+	\item $\Sigma=\Sigma_k \cup\{\natural\}$
 	\item $s=S$
 	\item $A=\{t\}$
 	\item $\delta$ is defined as follows \\ \[\delta(q,a)=\begin{cases}
@@ -69,6 +70,6 @@ Let us define NFA $N=(Q,\Sigma,\delta,s,A)$ such that $N$ defines the language $
 		\{t\} & \text{if }q=t\text{ and }a\in\Sigma_k\\
 	\end{cases}\]
 \end{itemize}
-Reading an input symbol $a$ from the start state $S$ where $a \in\Sigma_k$ will bring the existing thread to state $a$ where the $i=0$ denotes a $\natural$ has not been seen yet. It will also activate a new thread in $S$ due to an $\epsilon$ transition. It will stay in the state $(0, j)$ if it continues to read input symbols $j\in \Sigma_k^*$ but has not yet read $\natural$.
-If $i=1$, the $\natural$ symbol has been read. Then, if $a\neq j$ that were seen before $\natural$, it stays in that state. It moves to an accept state $\{t\}$ if $i=1$ and it reads an input $a=j$ that is in the set of symbols seen before $\natural$. Once a string has been accepted, it will stay in the accept state. 
+Reading an input symbol $a$ from the start state $S$ where $a \in\Sigma_k$ will bring the existing thread to state $(0,a)$ where the $i=0$ denotes a $\natural$ has not been seen yet. It will also activate a new thread in $S$ due to an $\epsilon$ transition. It will stay in the state $(0, j)$ if it continues to read input symbols $j\in \Sigma_k$ but has not yet read $\natural$.
+If $i=1$, the $\natural$ symbol has been read. Then, if $a\neq j$ that were seen before $\natural$, it stays in that state. It moves to an accept state $\{t\}$ if $i=1$ and it reads an input $a=j$ that is in the set of symbols seen before $\natural$. Once a string has been accepted, it will stay in the accept state unless a $\natural$ symbol has been read. 
 \end{document}
