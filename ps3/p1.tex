@@ -1,0 +1,59 @@
+\documentclass[11pt]{article}
+%Gummi|065|=)
+\title{\textbf{CS 374 Spring 2018\\Homework 3}}
+\author{Nathaniel Murphy (njmurph3@illinois.edu)\\
+		Tanvi Modi (tmodi3@illinois.edu)\\
+		Marianne Huang (mhuang46@illinois.edu)}
+\date{}
+
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+\section*{1.}
+$\Sigma=\{a,b\}$ and $\Delta=\{0,1\}$. Define homomorphism $h:\Sigma\rightarrow\Delta^*$ where $h(a)=01$ and $h(b)=10$. We see that $h^{-1}(01)=a$ and $h^{-1}(10)=b$.
+\begin{itemize}
+	\item $h^{-1}(\{0101\})=\{aa\}$
+	\item $h^{-1}(\{00\})=\emptyset$
+	\item $h^{-1}(\{001\})=\emptyset$
+	\item $h^{-1}(\{1001\})=\{ba\}$
+\end{itemize}
+Notice that the second and third are equivalent to $\emptyset$ because
+\[h^{-1}(L)=\{w\in\Sigma^*\hspace{1mm}|\hspace{1mm}h(w)\in L\}\Rightarrow h^{-1}(w)=\{u\in\Sigma^*\hspace{1mm}|\hspace{1mm}h(u)=w\}\]
+and no such $u\in\Sigma^*$ exists such that $h(u)\in\{00,001\}$.
+\\[15mm]
+Let $L=L\big((00+1)^*\big)$.
+\begin{itemize}
+	\item $h^{-1}(L)=(ab)^*$
+	\item $h(h^{-1}(L))=(1001)^*$
+\end{itemize}
+$h^{-1}((00+1)^*)=(ab)^*$ because for every $w\in h^{-1}((00+1)^*)$, $w$ must start with a 1, then must be followed by 00, then must be followed by another 1.
+\clearpage
+\section*{2.}
+We will use the property that $h(uv)=h(u)h(v)$.
+\subsection*{(a)}
+For every $w\in\Sigma^*,\hspace{1mm}\delta^*_N(s',w)=\delta^*_M(s,h(w))$.
+\subsection*{(b)}
+\underline{Claim:} $\forall\hspace{1mm}w\in\Sigma^*,\hspace{1mm}\delta^*_N(s',w)=\delta^*_M(s,h(w))$. \\
+\underline{Proof:} \\ \\
+\underline{\textbf{Base}:} $|w|=0,\hspace{1mm}w=\epsilon$. $\delta^*_N(s',w)=\delta^*_N(s',\epsilon)=\delta(s',\epsilon)=s'=s=\delta'(s,\epsilon)=\delta'(s,h(\epsilon))=\delta^*_M(s,h(\epsilon))=\delta^*_M(s,h(w))$. \\ \\
+\underline{\textbf{Inductive Hypothesis}:} Assume that $\forall\hspace{1mm}w\in\Sigma^*$, $|w|<k\Rightarrow\delta^*_N(s',w)=\delta^*_M(s,h(w))$. \\ \\
+\underline{\textbf{Inductive Case}:} Let $w\in\Sigma^*$ such that $|w|=k$. $w$ can be written as $w=ua$, where $u\in\Sigma^{k-1}$ and $u\in\Sigma$. We see that:
+\[\delta^*_N(s',w)=\delta^*_N(s',ua)=\delta^*_N\big(\delta^*_N(s',u),a\big)=\delta^*_N\big(\delta^*_N(s',u),a\big)\]
+\[=\delta'\big(\delta^*_M(s,h(u)),a\big)=\delta^*_M\big(\delta^*_M(s,h(u)),h(a)\big)=\delta^*_M(s,h(u)h(a))\]
+Because $h(uv)=h(u)h(v)$, $u,v\in\Sigma^*$, it follows that
+\[\delta^*_M(s,h(u)h(a))=\delta^*_M(s,h(w))\]
+\subsection*{(c)}
+Prove $L(N)=h^{-1}(L)$. \\ \\
+Fix $w\in L(M)$. Wewant to show that $h^{-1}(w)\in L(N)$. \\
+From the definition of $h^{-1}(L)=\{w\in\Sigma^*\hspace{1mm}|\hspace{1mm}h(w)\in L\}$, we see that it suffices to fix $w\in L(N)$ and show that $h(w)\in L(M)$. \\ \\
+Because $Q'=Q$ and $A'=A$, we see that
+\[\delta^*_N(s',w)=\delta^*_M(s,h(w))\]
+which means that $\delta^*_N(s',w)\in A\Rightarrow\delta^*_M(s,h(w))\in A$. \\ \\
+It follows that $L(N)=h^{-1}(L)$.
+\end{document}
