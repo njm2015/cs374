@@ -1,0 +1,46 @@
+\documentclass[11pt]{article}
+%Gummi|065|=)
+\title{\textbf{CS 374 Spring 2018 \\
+				Homework 3}}
+\author{Nathaniel Murphy (njmurph3) \\
+		Tanvi Modi (tmodi3) \\
+		Marianne Huang (mhuang46)}
+\date{}
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{scrextend}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 3 Solution:}
+
+\subsection*{1. $L = \{xx^Rw\hspace{1mm}|\hspace{1mm}w,x \in \{0, 1\}^+\}$}
+\begin{addmargin}[2em]{0em}
+Consider a fooling set $F = $ \\
+Let $u, v \in F$ where $u \neq v$ \\
+Let $u = $ \\
+Let $v = $ \\
+Distinguishing suffix $w = $ \\
+$uw = \text{, } uw \in F$ \\
+$vw = \text{, } vw \notin F$ \\
+$F$ is a fooling set and $|F| = \infty$, therefore L is irregular.
+\end{addmargin}
+
+\subsection*{2. $L = \{0^i1^j0^{ij}\hspace{1mm}|\hspace{1mm}i,j > 0\}$}
+\begin{addmargin}[2em]{0em}
+Consider a fooling set $F = \{0^m1^n0^{mn}\hspace{1mm}|\hspace{1mm}m,n > 0\}$ \\
+Let $u, v \in F$ where $u \neq v$ \\
+Let $u = 0^m1^m$ \\
+Let $v = 0^m1^n$ \\
+Distinguishing suffix $w = 0^{mm}$ \\
+$uw = 0^m1^m0^{mm}\text{, } uw \in F$ \\
+$vw = 0^m1^n0^{mm}\text{, } vw \notin F$ \\
+$F$ is a fooling set and $|F| = \infty$, therefore L is irregular.
+\end{addmargin}
+
+\end{document}
