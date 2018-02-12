@@ -44,16 +44,16 @@ For every $w\in\Sigma^*,\hspace{1mm}\delta^*_N(s',w)=\delta^*_M(s,h(w))$.
 \underline{\textbf{Base}:} $|w|=0,\hspace{1mm}w=\epsilon$. $\delta^*_N(s',w)=\delta^*_N(s',\epsilon)=\delta(s',\epsilon)=s'=s=\delta'(s,\epsilon)=\delta'(s,h(\epsilon))=\delta^*_M(s,h(\epsilon))=\delta^*_M(s,h(w))$. \\ \\
 \underline{\textbf{Inductive Hypothesis}:} Assume that $\forall\hspace{1mm}w\in\Sigma^*$, $|w|<k\Rightarrow\delta^*_N(s',w)=\delta^*_M(s,h(w))$. \\ \\
 \underline{\textbf{Inductive Case}:} Let $w\in\Sigma^*$ such that $|w|=k$. $w$ can be written as $w=ua$, where $u\in\Sigma^{k-1}$ and $u\in\Sigma$. We see that:
-\[\delta^*_N(s',w)=\delta^*_N(s',ua)=\delta^*_N\big(\delta^*_N(s',u),a\big)=\delta^*_N\big(\delta^*_N(s',u),a\big)\]
+\[\delta^*_N(s',w)=\delta^*_N(s',ua)=\delta^*_N\big(\delta^*_N(s',u),a\big)=\delta'\big(\delta^*_N(s',u),a\big)\]
 \[=\delta'\big(\delta^*_M(s,h(u)),a\big)=\delta^*_M\big(\delta^*_M(s,h(u)),h(a)\big)=\delta^*_M(s,h(u)h(a))\]
 Because $h(uv)=h(u)h(v)$, $u,v\in\Sigma^*$, it follows that
 \[\delta^*_M(s,h(u)h(a))=\delta^*_M(s,h(w))\]
 \subsection*{(c)}
 Prove $L(N)=h^{-1}(L)$. \\ \\
-Fix $w\in L(M)$. Wewant to show that $h^{-1}(w)\in L(N)$. \\
+Fix $w\in L(M)$. We want to show that $h^{-1}(w)\in L(N)$. \\
 From the definition of $h^{-1}(L)=\{w\in\Sigma^*\hspace{1mm}|\hspace{1mm}h(w)\in L\}$, we see that it suffices to fix $w\in L(N)$ and show that $h(w)\in L(M)$. \\ \\
 Because $Q'=Q$ and $A'=A$, we see that
-\[\delta^*_N(s',w)=\delta^*_M(s,h(w))\]
+\[\delta^*_N(s',w)=\delta^*_M(s,h(w)), \hspace{2mm}\forall\hspace{1mm}w\in\Sigma^*\]
 which means that $\delta^*_N(s',w)\in A\Rightarrow\delta^*_M(s,h(w))\in A$. \\ \\
 It follows that $L(N)=h^{-1}(L)$.
 \end{document}
