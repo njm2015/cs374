@@ -21,13 +21,13 @@
 
 \subsection*{1. $L = \{xx^Rw\hspace{1mm}|\hspace{1mm}w,x \in \{0, 1\}^+\}$}
 \begin{addmargin}[2em]{0em}
-Consider a fooling set $F = $ \\
+Consider a fooling set $F = \{0^n1\hspace{1mm}|\hspace{1mm}n>0\}$ \\
 Let $u, v \in F$ where $u \neq v$ \\
-Let $u = $ \\
-Let $v = $ \\
-Distinguishing suffix $w = $ \\
-$uw = \text{, } uw \in F$ \\
-$vw = \text{, } vw \notin F$ \\
+Let $u = 0^i1$ \\
+Let $v = 0^j1$ \\
+Distinguishing suffix $w = 10^iw, w \in \{0, 1\}^+$ \\
+$uw = 0^i110^iw \in F$ \\
+$vw = 0^j110^iw \notin F$ \\
 $F$ is a fooling set and $|F| = \infty$, therefore L is irregular.
 \end{addmargin}
 
@@ -38,8 +38,8 @@ Let $u, v \in F$ where $u \neq v$ \\
 Let $u = 0^m1^m$ \\
 Let $v = 0^m1^n$ \\
 Distinguishing suffix $w = 0^{mm}$ \\
-$uw = 0^m1^m0^{mm}\text{, } uw \in F$ \\
-$vw = 0^m1^n0^{mm}\text{, } vw \notin F$ \\
+$uw = 0^m1^m0^{mm} \in F$ \\
+$vw = 0^m1^n0^{mm} \notin F$ \\
 $F$ is a fooling set and $|F| = \infty$, therefore L is irregular.
 \end{addmargin}
 
