@@ -1,0 +1,44 @@
+\documentclass[11pt]{article}
+\title{Problem 3 lemma}
+\date{}
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
+\begin{document}
+\maketitle
+
+\section*{Problem 2}
+ For this problem, A contains B is defined as the collection of all strings in A that have some string in B as a substring. \\ \\
+ 1. When $A = \{1001,1111\}$ and $B = \{01,10\}$ , $A$ contains $B$ = $\{1001\}$.This is simply because the string 1001 is the only string in $A$ that has 10 or (in this case, and) 01 as substrings in it.The string 1111 has no substring in it which is a string in $B$ and hence does not belong in the set $A$ contains $B$. \\\\
+2. When $A = L((0+1)^*)$ and $B = L(1^*)$ , $A$ contains $B = (0+1)^*$.This is because $A$ is the set of all binary strings and $B$ is the set of all strings of 1 including the empty string. Since $A$ contains $B$ can be any binary string containing a 1 or the empty string, $A$ contains $B$ is $(0+1)^*$.\\\\
+3. We want to prove that if $A$ and $B$ are regular then the language $A$ contains $B$ is also regular. We use previously established closure properties to prove this result.\\\\
+We will construct a new language MID$(L)$ as follows:
+\[\text{MID}(L)=\{w\hspace{1mm}|\hspace{1mm}\exists\hspace{1mm}x,z\in\Sigma^*,\hspace{1mm}y\in L\text{ such that }w=xyz\}\]
+\ \\
+\underline{\textbf{Claim}:} $\hspace{3mm}$MID$(L)=\{w\hspace{1mm}|\hspace{1mm}\exists\hspace{1mm}x,z\in\Sigma^*,\hspace{1mm}y\in L$ such that $w = xyz\}$ is regular if $L$ is regular. \\ \\
+\underline{\textbf{Proof}:} Let us assume that $L$ is regular. We will then prove that MID$(L)$ is regular. $L$ is regular implies that a DFA $M=(Q,\Sigma,\delta,s,A)$ exists such that $L(M)=L$. Let us construct a new NFA $N$ that will recognize $L($MID$(L))$. \\ \\
+Let us define $N=(Q',\Sigma',\delta',s',A')$.
+\begin{itemize}
+	\item $Q'=Q\cup\{s',t\}$
+	\item $\Sigma'=\Sigma$
+	\item $s'=s'$
+	\item $A'=\{t\}$
+	\item Let us define $\delta'$:
+	\begin{itemize}
+		\item $\delta'(q,a)=\delta(q,a)$ if $q\in Q\setminus A$
+		\item $\delta'(s',a)=s,$ $a\in\Sigma$
+		\item $\delta'(s,\epsilon)=s'$
+		\item $\delta'(q,a)=t,$ $q\in A,a\in\Sigma$
+		\item $\delta'(t,a)=t,$ $a\in\Sigma$
+	\end{itemize}
+\end{itemize}
+We have constructed an NFA $N$ such that $L(N)=L($MID$(L))$, and thus, $L($MID$(L))$ is regular. \\ \qed \\ \\
+It follows from the proof above that MID$(B)$ is regular because $B$ is regular. \\ \\
+Because $A\subseteq\Sigma^*$ and $B\subseteq\Sigma^*$, we observe that
+\[A\text{ contains }B=\{w\in A\hspace{1mm}|\hspace{1mm}\exists\hspace{1mm}x,y,z.\hspace{1mm}y\in B\text{ and }w=xyz\}\]
+\[=A\cap\{w\hspace{1mm}|\hspace{1mm}\exists\hspace{1mm}x,y\in\Sigma^*,\hspace{1mm}y\in B\text{ such that }w=xyz\}\]
+\[=A\cap\text{MID}(B)\]
+Since $A$ contains $B$ is the intersection of two regular languages, $A$ contains $B$ is regular. \\ \qed
+\end{document}
