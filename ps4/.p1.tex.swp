@@ -1,0 +1,51 @@
+\documentclass[11pt]{article}
+\title{\textbf{CS 374 Spring 2018\\Homework 4}}
+\author{Nathaniel Murphy (njmurph3)\\
+		Tanvi Modi (tmodi3)\\
+		Marianne Huang (mhuang46)}
+\date{}
+
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\begin{document}
+\maketitle
+
+\section*{Problem 1}
+\subsection*{1.}
+\[L=\{w\in\{0,1\}^*\hspace{1mm}|\hspace{1mm}w\neq w^{R}\}\]
+Let us define a context free grammar $G=(\Sigma, \Gamma, R, S)$ such that $L(G)=L$.
+\begin{itemize}
+	\item $\Sigma=\{0,1\}$
+	\item $\Gamma = \{S,M\}$
+	\item $S=S$
+	\item Let $R$ be defined as follows:
+	\begin{itemize}
+		\item $S\rightarrow 0S0\hspace{1mm}|\hspace{1mm}1S1\hspace{1mm}|\hspace{1mm}1M0\hspace{1mm}|\hspace{1mm}0M1$
+		\item $M\rightarrow 1M1\hspace{1mm}|\hspace{1mm}1M0\hspace{1mm}|\hspace{1mm}0M0\hspace{1mm}|\hspace{1mm}0M1\hspace{1mm}|\hspace{1mm}0\hspace{1mm}|\hspace{1mm}1\hspace{1mm}|\hspace{1mm}\epsilon$
+	\end{itemize}
+\end{itemize}
+Notice that the only way to terminate $w\in L(G)$ is to go to the rule $M$. For a word $w$, notice that $w[i]=w^R[k-i]$ where $k$ is the length of $w$ (and the 'w[i]' notation is indexed notation for the symbol at location $i$ in string $w$. The only way ot go to rule $M$ is to write different symbols in the $i$ and $k-i$ positions. The only way $w^R=w$ is if $w[i]=w^R[i]$, but since $w[i]\neq w[k-i]\Rightarrow w^R[k-i]\neq w[k-i],\hspace{1mm}w\neq w^R$.
+
+\clearpage
+\subsection*{2.}
+\[L=\{a^ib^jc^kd^\ell\hspace{1mm}|\hspace{1mm}i+l=j+k\}\]
+Let us define a context free grammar $G=\{\Sigma,\Gamma,R,S\}$ such that $L(G)=L$.
+\begin{itemize}
+	\item $\Sigma=\{a,b,c,d\}$
+	\item $\Gamma=\{S,A,B,C,D\}$
+	\item $S=S$
+	\item Let $R$ be defined as follows:
+	\begin{itemize}
+		\item $S\rightarrow AD\hspace{1mm}|\hspace{1mm}BD\hspace{1mm}|\hspace{1mm}BC\hspace{1mm}|\hspace{1mm}\epsilon$
+		\item $A\rightarrow aAc\hspace{1mm}|\hspace{1mm}aBc\hspace{1mm}|\hspace{1mm}\epsilon$
+		\item $B\rightarrow aBb\hspace{1mm}|\hspace{1mm}\epsilon$
+		\item $C\rightarrow bCd\hspace{1mm}|\hspace{1mm}bDd\hspace{1mm}|\hspace{1mm}\epsilon$
+		\item $D\rightarrow cDd\hspace{1mm}|\hspace{1mm}\epsilon$
+	\end{itemize}
+\end{itemize}
+First let us note that the rules $A,B,C,D$ have no significance relating to their specific letters; let them just be generic placeholder non-terminals. The letters $a,b,c,d$ must appear in alphabetical order, so essentially, what this construction exploits is splitting up the word $w$ into 2 parts $w_1w_2$. The first part, $w_1$ continas all $i$ of the $a's$ and the next $i$ characters in the string (which must be in $\{b,c\}$). The second part of the word, $w_2$ contains $\ell$ characters (also from $\{b,c\}$ followed by $\ell$ $d's$. This insures that no inbalance is achieved because all of our rules ensure that the balance $i+\ell=j+k$ is maintained by only writing characters of 'opposite' values.
+\end{document}
